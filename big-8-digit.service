@@ -1,0 +1,14 @@
+[Unit]
+Description=Big-8-digit Backend
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/python3  /home/pi/big-8-digit/8-digit-controller.py > /home/pi/big-8-digit.log 2>&1
+WorkingDirectory=/home/pi/big-8-digit
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

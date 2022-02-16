@@ -1,0 +1,6 @@
+# This is the control file for the big-8-digit display
+# a comment starts with a hash '#'
+# Enter a plain string to display it. e.g.: 1000.00
+# Enter 'clock' to display current time
+# Start a line with > followed by a time to countdown to like: >23:45:00
+HELLO
