@@ -14,7 +14,7 @@ network={
 ## SSH to your pi and run the following commands...
 sudo raspi-config
 - enable SPI
-sudo apt-get install git
+sudo apt-get install git python3-dev
 git config --global credential.helper store
 git clone https://github.com/sommeru/big-8-digit.git
 vim /home/pi/big-8-digit/config.json

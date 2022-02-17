@@ -9,30 +9,26 @@ def init_display():
     global spi
 
     spi = spidev.SpiDev()
-    spi.open(0,0) # SPI-Schnittstelle aktivieren CS0 , Chanel 0
-    spi.max_speed_hz = 50000 # SPI-Clock läuft mit maximal 50kHz, ist unbedingt nötig (MAX7219 laut Datenblatt max. 10MHz)
-    #spi.writebytes([0x0F,0x01]) # Displaytest ein,
-    time.sleep(0.5) # 0,5s warten
-    #spi.writebytes([0x0F,0x00]) # Displaytest aus
-    spi.writebytes([0x0C,0x01]) # Normalmodus
-    spi.writebytes([0x0A,0x0F]) # Intensität maximal
-    spi.writebytes([0x0B,0x07]) # Scanlimit alle anzeigen
-    spi.writebytes([0x09, 0x00]) # Direktmodus aktivieren
-    spi.close() # SPI-Schnittstelle in Ruhemodus (Ende Inizialisierung MAX7219)
-    # im direkt Ansteuermodus
-    # spi.writebytes([0x01,0b00000011]) # A
-    # spi.writebytes([0x02,0b00000111]) # B
-    # spi.writebytes([0x03,0b00000111]) # C
-    # spi.writebytes([0x04,0b00000011]) # D
-    # spi.writebytes([0x05,0b00000011]) # E
-    # spi.writebytes([0x06,0b00000011]) # F
-    # spi.writebytes([0x07,0b00000000]) # G
-    # spi.writebytes([0x08,0b00000100]) # DP
-    # #             Stelle   12345678
-
-    #time.sleep(0.5)
-
-
+    spi.open(0,0) # enable SPI CS0 , Channel 0
+    spi.max_speed_hz = 50000 # SPI-Clock max 50kHz is sticktly neccesary
+    #spi.writebytes([0x0F,0x01]) # Displaytest on
+    time.sleep(0.5)
+    #spi.writebytes([0x0F,0x00]) # Displaytest off
+    spi.writebytes([0x0C,0x01]) # normal mode
+    spi.writebytes([0x0A,0x0D]) # Set intensity just slightly submax for best contrast
+    spi.writebytes([0x0B,0x07]) # Scanlimit show all digits
+    spi.writebytes([0x09, 0x00]) # Direct mode
+    spi.close() 
+    
+def brightness(brightness):
+    spi.open(0,0) # enable SPI CS0 , Channel 0
+    spi.max_speed_hz = 50000
+    if (brightness > 15):
+        brightness = 15
+    elif (brightness < 0):
+        brightness = 0
+    spi.writebytes([0x0A,brightness]) # set brightness from 0x00 to 0x0F
+    spi.close()
 
 def char_to_segments(s):
     (a, b, c, d, e, f, g, p) = (0, 0, 0, 0, 0, 0, 0, 0)

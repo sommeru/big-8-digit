@@ -51,6 +51,10 @@ def checkUrl():
             elif (decoded_line[0] == '>'):
                 mode = 'timer' # turn display into timer mode
                 timertarget = decoded_line[1:9]
+            elif (decoded_line[0] == '%'): # if % is preceeding go to command mode
+                if ('brightness' in decoded_line):
+                    brightness = int(decoded_line[len(decoded_line)-2:len(decoded_line)-1])
+                    display.brightness(brightness)
             else:
                 mode = 'string'
                 display.show_string(decoded_line)

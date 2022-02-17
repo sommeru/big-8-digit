@@ -1,6 +1,7 @@
 # This is the control file for the big-8-digit display
-# a comment starts with a hash '#'
 # Enter a plain string to display it. e.g.: 1000.00
+# Enter %brightness followed by 0 to 15 to change display brightness. e.g. %brightness 5
 # Enter 'clock' to display current time
 # Start a line with > followed by a time to countdown to like: >23:45:00
-HELLO
+%brightness 8
+-HELLO-
